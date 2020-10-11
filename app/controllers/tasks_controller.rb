@@ -1,7 +1,9 @@
 class TasksController < ApplicationController
     before_action :set_task, only: [:show, :edit, :update, :destroy]
     
-    before_action :require_user_logged_in, only: [:index, :show, :new]
+    before_action :require_user_logged_in, only: [:index, :new]
+    
+    before_action :correct_user, only: [:destroy]
     
     def index
         @tasks = Task.all.page(params[:page]).per(3)
@@ -15,7 +17,7 @@ class TasksController < ApplicationController
     end
 
     def create
-        @task = Task.new(task_params)
+        @task = current_user.tasks.build(task_params)
         
         if @task.save
             flash[:success] = 'Task が正常に追加されました'

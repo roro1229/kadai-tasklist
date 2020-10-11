@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'tasklist/create'
+  get 'tasklist/destroy'
   get 'sessions/new'
   get 'sessions/create'
   get 'sessions/destroy'
@@ -19,4 +21,6 @@ Rails.application.routes.draw do
   
   resources :tasks
   resources :users, only: [:index, :show, :new, :create]
+  
+  resources :tasklists, only: [:create, :destroy]
 end
