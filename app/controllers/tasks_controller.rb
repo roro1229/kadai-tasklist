@@ -6,7 +6,7 @@ class TasksController < ApplicationController
     before_action :correct_user, only: [:show, :edit, :update, :destroy]
     
     def index
-        @tasks = Task.all.page(params[:page]).per(3)
+        @tasks = current_user.tasks.page(params[:page]).per(3)
     end
 
     def show
@@ -29,6 +29,7 @@ class TasksController < ApplicationController
     end
 
     def edit
+        @task = Task.find(params[:id])
     end
 
     def update
