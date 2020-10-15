@@ -8,9 +8,6 @@ class TasksController < ApplicationController
         @tasks = current_user.tasks.page(params[:page]).per(3)
     end
 
-    def show
-    end
-
     def new
         @task = Task.new
     end
